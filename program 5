@@ -1,0 +1,44 @@
+#include <iostream>
+#include "Vertex.h"
+#include "WeightedGraph.h"
+using namespace std;
+
+int main() 
+{
+    WeightedGraph myGraph(10);
+
+    // Create vertices
+    Vertex* a = new Vertex("A");
+    Vertex* b = new Vertex("B");
+    Vertex* c = new Vertex("C");
+    Vertex* d = new Vertex("D");
+    Vertex* e = new Vertex("E");
+
+    myGraph.addVertex(a); // index 0
+    myGraph.addVertex(b); // index 1
+    myGraph.addVertex(c); // index 2
+    myGraph.addVertex(d); // index 3
+    myGraph.addVertex(e); // index 4
+
+    // Add edges EXACTLY like the picture
+    myGraph.addEdge(4, 0, 7);   // E → A
+    myGraph.addEdge(0, 1, 10);  // A → B
+    myGraph.addEdge(0, 2, 12);  // A → C
+    myGraph.addEdge(2, 1, 20);  // C → B
+    myGraph.addEdge(2, 3, 32);  // C → D
+    myGraph.addEdge(0, 3, 60);  // A → D
+
+    cout << endl << "DFS starting at E:" << endl;
+    myGraph.DFS(e);
+
+    cout << endl << "BFS starting at E:" << endl;
+    myGraph.BFS(e);
+
+    cout << endl;
+    cout << "Testing path function:" << endl;
+
+    myGraph.findPath(4, 3);  // E → D  (exists)
+    myGraph.findPath(1, 4);  // B → E  (no path)
+
+    return 0;
+}
